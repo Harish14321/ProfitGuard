@@ -6,7 +6,7 @@ Last updated: 2026-02-27
 
 ProfitGuard ("we", "us", "our") provides analytics and alerting for Shopify merchants to help detect potential profit leaks.
 
-Business name: **[ZesToraX]**  
+Business name: **ZesToraX**  
 Contact email: **support@zestorax.com**  
 Website: **https://zestorax.com**
 
