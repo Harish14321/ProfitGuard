@@ -6,7 +6,7 @@ Last updated: 2026-02-27
 
 By installing or using ProfitGuard, you agree to these Terms of Service ("Terms"). If you do not agree, do not use the app.
 
-Provider: **[ZesToraX]**  
+Provider: **ZesToraX**  
 Contact: **support@zestorax.com**
 
 ## 2. Service description
