@@ -73,8 +73,8 @@ The Metrics page provides a deeper analytical view:
 - **Profit Leaks** — Top cost drivers pulling your margin down
 - **Recommendations** — Dynamic tips triggered by your actual data (not generic advice)
 
-### Configurable payment fee rate
-Set `PG_PAYMENT_FEE_RATE` (default `0.029`) and `PG_PAYMENT_FEE_FLAT` (default `0.30`) in your environment to match your Shopify payment gateway rate.
+### How profit is calculated
+ProfitGuard deducts COGS, estimated payment processing fees (standard Shopify rate), shipping, refunds, and discounts from your revenue to arrive at net profit.
 
 ---
 
@@ -83,11 +83,10 @@ Set `PG_PAYMENT_FEE_RATE` (default `0.029`) and `PG_PAYMENT_FEE_FLAT` (default `
 Breaks down profit to the individual SKU level.
 
 **How profit is calculated per product:**
-```
-Net Profit = Revenue − COGS − Shipping (proportional) − Payment Fees (by revenue share) − Refunds − Discounts
-```
 
-Revenue per line item uses `discountedTotalSet` from Shopify (actual price after discounts applied), not a quantity-based estimate.
+Net Profit = Revenue − COGS − Shipping (proportional) − Payment Fees − Refunds − Discounts
+
+Revenue is based on the actual price paid by the customer after any discounts.
 
 ### Key sections
 - **Hero Banner** — Total net profit, margin, units sold, health badge
@@ -130,9 +129,9 @@ Your central hub for all active profit leaks, ranked by financial impact.
 Identifies which products are driving your refund costs and why.
 
 - Analyses all refunded orders in the selected period (7 / 30 / 90 days)
-- Extracts Shopify `refunds.note` as the reason per variant
+- Shows the reason recorded for each refund per product
 - Allocates refund dollars proportionally by line item value
-- Shows concentration warning when one SKU drives > 25% of total refunds
+- Shows a concentration warning when one product drives the majority of your refunds
 
 ### Interpreting results
 - **High concentration** → One product is the primary problem; investigate quality, descriptions, or sizing
@@ -146,9 +145,9 @@ Finds products with zero sales in the last **60 days** that still have stock on 
 
 **Why it matters:** Unsold stock ties up cash and incurs storage costs. Dead inventory = cash you can't invest in winning products.
 
-- **Cash Tied Up** = `inventoryQuantity × unitCost` per variant
-- **Worst Offenders** — Top 3 by cash tied up
-- **Stale Days** — Days since last sale (real data shows 60+ days; demo shows varying days for illustration)
+- **Cash Tied Up** — Estimated value of unsold stock based on your product costs
+- **Worst Offenders** — Top 3 products by cash tied up
+- **Stale Days** — Number of days since the last sale
 
 ### Recommended actions shown in-app
 1. Clearance sale (e.g., 30–50% off)
@@ -161,22 +160,18 @@ Finds products with zero sales in the last **60 days** that still have stock on 
 
 ## AI Weekly Summary
 
-Generates a plain-English profit summary for your store using GPT-4o-mini.
-
-**Requires:** `PROFITGUARD_AI_KEY` environment variable set to your OpenAI API key.
+Generates a plain-English profit summary for your store every week. Available on Growth, Advanced, and Premium plans.
 
 The summary covers:
-- Revenue, orders, refunds, and net profit vs previous period
-- Top 3 products by profit and any loss products
+- Revenue, orders, refunds, and net profit vs the previous period
+- Top 3 products by profit and any products losing money
 - Full cost breakdown (COGS, shipping, fees, refunds, discounts)
 - Dead inventory alert with worst offenders
 - 7 prioritized recommendations (🔴 critical / 🟡 attention / 🟢 positive)
 
-If no OpenAI key is set, a **template-based summary** is generated automatically — no AI key needed for this fallback.
-
 ### Source badge
-- 🤖 **AI-generated** — GPT-4o-mini powered narrative
-- 📋 **Template-based** — Rule-based summary using your data
+- 🤖 **AI-generated** — Powered by AI for a narrative summary
+- 📋 **Template-based** — Rule-based summary using your data (shown when AI is unavailable)
 
 ---
 
@@ -220,51 +215,36 @@ You can cancel at any time from the **Billing** page. Access continues until the
 
 ## COGS Import
 
-Accurate profit margins require cost-of-goods (COGS) data. There are two ways to add it:
+Accurate profit margins require cost-of-goods (COGS) data — what you actually paid for each product. There are two ways to add it:
 
 ### Option 1: CSV Import
-1. Download the sample CSV from the **Product Profit** page
-2. Fill in `variant_id` and `unit_cost` for each SKU
-3. Upload via the Import COGS button
+1. Go to the **Product Profit** page and download the sample CSV
+2. Fill in the cost price for each of your products
+3. Upload the file using the **Import COGS** button
 
-Sample CSV format:
-```csv
-variant_id,unit_cost,currency
-gid://shopify/ProductVariant/123456789,12.50,USD
-gid://shopify/ProductVariant/987654321,8.00,USD
-```
+The CSV has two columns: one for the product variant identifier and one for the cost price. Download the sample file from the app for the exact format.
 
-### Option 2: Auto-enrichment (server-side)
-Run the enrichment script to pull `inventoryItem.unitCost` from Shopify directly:
-```bash
-npm run enrich:cogs
-```
-Requires the shop's access token to be stored in the `Shop.accessToken` field.
-
-### Option 3: Shopify variant cost sync
-If you set costs directly in Shopify (Products → Variant → Cost per item), ProfitGuard reads these automatically via the Admin GraphQL API.
+### Option 2: Shopify variant cost sync
+If you already set a **Cost per item** in Shopify (Products → select a product → scroll to a variant → Cost per item), ProfitGuard reads these automatically — no import needed.
 
 ---
 
 ## FAQ
 
 **How often is data refreshed?**  
-Real-time on every page load (up to your plan's order limit). Weekly snapshots are saved automatically by the cron job every Monday.
+Data is refreshed in real time on every page load, up to your plan's order limit. A weekly snapshot is also saved automatically every Monday.
 
 **Does ProfitGuard work with multiple currencies?**  
-Yes. Values are read in your shop's default currency (`shopMoney`). Multi-currency display conversion is planned for a future release.
+Yes. Values are shown in your shop's default currency. Multi-currency display conversion is planned for a future release.
 
 **Why does my net profit look different from Shopify?**  
-Shopify shows gross sales. ProfitGuard deducts COGS, estimated payment fees (2.9% + $0.30), shipping allocated per order, refunds, and discounts. Import COGS data for the most accurate result.
+Shopify shows gross sales. ProfitGuard deducts product costs (COGS), payment processing fees, shipping, refunds, and discounts to show your true net profit. Import your COGS data for the most accurate result.
 
 **What happens to my data if I uninstall?**  
 Data is retained per our Privacy Policy for a defined period, then deleted. You can request immediate deletion by contacting support.
 
 **Can I use ProfitGuard on multiple stores?**  
 Yes. Each store installation is independent with its own data and billing.
-
-**How do I disable demo/sample data?**  
-Set `PG_DISABLE_DEMO=true` in your environment. All pages will show real empty states instead of demo data.
 
 ---
 
