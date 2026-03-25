@@ -1,6 +1,6 @@
-# ProfitGuard Privacy Policy 
+# ProfitGuard Privacy Policy
 
-Last updated: 2026-02-27
+Last updated: 2026-03-26
 
 ## 1. Who we are
 
@@ -63,7 +63,11 @@ We do not sell merchant or customer data. We may share information only as neede
 
 ## 7. Data retention
 
-We retain data only as long as needed for legitimate business purposes, legal obligations, and service continuity. Data retention periods will be defined in production operations documentation and may be updated over time.
+We retain data only as long as needed for legitimate business purposes, legal obligations, and service continuity.
+
+- **Session data** is deleted immediately when the app is uninstalled.
+- **Shop data** (metrics, alerts, billing records) is permanently deleted within **30 days** of receiving the GDPR shop/redact webhook from Shopify.
+- You may request immediate deletion at any time by contacting **support@zestorax.com**.
 
 ## 8. Data security
 
@@ -77,7 +81,10 @@ For requests, contact: **support@zestorax.com**
 
 ## 10. App uninstall and deletion workflow
 
-When the app is uninstalled, we will process data according to our retention/deletion procedures and legal requirements. Final deletion timelines should be documented before launch.
+When the app is uninstalled:
+- **Session data** is deleted immediately.
+- Shopify sends a `shop/redact` GDPR webhook 48 hours after uninstall. Upon receiving it, all remaining shop data (metrics, alerts, billing records, email preferences) is **permanently deleted within 30 days**.
+- You may request immediate deletion by contacting **support@zestorax.com**.
 
 ## 11. International transfers
 
