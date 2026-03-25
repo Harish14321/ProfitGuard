@@ -88,3 +88,5 @@ These Terms are governed by the laws of **India**, without regard to conflict-of
 ## 15. Contact
 
 Questions about these Terms: **support@zestorax.com**
+
+For our Privacy Policy, visit: **https://harish14321.github.io/ProfitGuard/privacy-policy.html**
