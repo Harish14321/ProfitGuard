@@ -1,6 +1,6 @@
 # ProfitGuard Terms of Service
 
-Last updated: 2026-02-27
+Last updated: 2026-03-26
 
 ## 1. Acceptance of terms
 
@@ -22,9 +22,19 @@ You represent that:
 
 ## 4. Billing and plans
 
-ProfitGuard may offer a free plan and paid subscription plans (currently including a `$19/month` plan), subject to Shopify billing workflows and approvals.
+ProfitGuard offers the following subscription plans, all billed through Shopify:
 
-- Charges are handled through Shopify where applicable
+| Plan | Price |
+|---|---|
+| **Free Trial** | Free — 7 days, full Premium access |
+| **Growth** | $19/month |
+| **Advanced** | $39/month |
+| **Premium** | $59/month |
+
+- All plans include a 7-day free trial — no credit card required
+- Charges are handled through Shopify
+- Access continues until the end of the current billing period upon cancellation
+- We do not issue refunds for partial months
 - Plan features and limits may differ by tier
 - We may update pricing or features with reasonable notice
 
