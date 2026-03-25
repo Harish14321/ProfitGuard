@@ -2,7 +2,7 @@
 
 > **ProfitGuard** — Profit Leak Detection & Recovery Engine for Shopify merchants.
 
-Last updated: 2026-03-23
+Last updated: 2026-03-26
 
 ---
 
@@ -197,7 +197,6 @@ Customize when ProfitGuard raises alerts. Defaults work for most stores but you 
 
 | Plan | Price | Orders analysed/run | Key features |
 |---|---|---|---|
-| **Free** | $0 | 50 orders | Basic profit analytics, 1 alert/run |
 | **Growth** | $19/mo | 500 orders | AI Weekly Summary, unlimited alerts, 90-day history |
 | **Advanced** | $39/mo | 2,000 orders | Dead Inventory, Cause Finder, custom thresholds, 1-year history |
 | **Premium** | $59/mo | Unlimited | All features, unlimited history, priority support |
@@ -206,7 +205,7 @@ Customize when ProfitGuard raises alerts. Defaults work for most stores but you 
 All new installs start with a 7-day free trial with full feature access. No credit card required.
 
 ### After trial expires
-Your account reverts to the Free plan. Your data is preserved. Upgrade any time to restore full access.
+A subscription is required to continue. Your data is preserved — subscribe at any time to restore full access.
 
 ### Cancellation
 You can cancel at any time from the **Billing** page. Access continues until the end of your billing period.
